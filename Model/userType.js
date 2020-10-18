@@ -3,8 +3,8 @@ let users = require('../Controller/Users.js');
 const payingUsers = require('../Controller/payingUsers.js');
 const freeUsers = require('../Controller/freeUsers.js');
 */
-const PaymentUser = require('../model/PaymentUser.js');
-const FreeUser = require('../model/FreeUser.js');
+const PaymentUser = require('./PaymentUser.js');
+const FreeUser = require('./FreeUser.js');
 
 
 

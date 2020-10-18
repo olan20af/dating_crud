@@ -6,19 +6,20 @@ const app = express();
 app.use(express.json());
 
 
-
 //Models 
+const Interest = require('./model/interest.js');
+const User = require("./model/User.js");
 const PaymentUser = require('./model/PaymentUser.js');
 const FreeUser = require('./model/FreeUser.js');
-const User = require("./model/User.js");
-const userType = require('./model/userType.js');
+const userType = require('./Model/userType.js');
 const validateUser = require('./Model/validateUser.js');
-
 
 //Users
 let users = require('./Controller/Users.js');
 
-
+//Interests
+let interests = require('./Controller/Interests.js');
+const Interest1 = require('./Controller/interest1.js');
 
 // Forsiden af dating appen med teksten "Dating App"
 app.get('/', (req, res) => {
@@ -30,8 +31,6 @@ app.get('/users', (req, res) => {
     res.send(users);
 });
 
-// tilføj en bruger
-let id = users.length+1;
 app.post('/users', (req, res) =>{
 
     // valdieret om alt er indtastet 
@@ -73,7 +72,6 @@ app.post('/users', (req, res) =>{
 
     // sender user til serveren
     res.send(user);
-    console.log(userType(user));
 });
 
 
@@ -140,6 +138,23 @@ app.get('/users/:id', (req, res) => {
   res.send(user);
 });
 
+
+// henter alle Interesser fra Interests array
+app.get('/users/:id/Interests', (req, res) => {
+    const user = users.find(c => c.id === parseInt(req.params.id));
+    let id = user.id;
+    if (!user) {
+        res.status(404).send('Brugeren med det givne id kan ikke findes')
+        return;
+      }
+    res.send(interests[user.id-1]);
+  }); 
+
+
 // PORT
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listen on port ${port}`));
+
+
+
+
