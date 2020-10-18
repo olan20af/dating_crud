@@ -9,7 +9,7 @@ const FreeUser = require('../model/FreeUser.js');
 
 
     // tjekker om det er en betalende bruger eller ej og derefter opretter en PaymentUser hvis isPaying = 1 ellers opretter den en FreeUser hvis isPaying = 0  
-function userType(){
+module.exports = function userType(user){
 
     // Opretter et array med betalende brugere
         var i;
@@ -36,7 +36,7 @@ function userType(){
                         Math.floor(1 + Math.random() * 10) + "/" + Math.floor(20 + Math.random() * 20)
                     );
                     // putter betalende brugere ind i et array
-                    payingUsers.push(payingUser);
+                   payingUsers.push(payingUser);
                 }
                 else
                 {
@@ -51,13 +51,10 @@ function userType(){
                         user.profile_text,
                         user.profile_img,
                         user.isPaying);
-                    
                     // putter gratis brugere ind i et array
-                    
-                    freeUsers.push(freeUser);
-                    console.log(freeUsers);
+
+                   freeUsers.push(freeUser);
                 }
             }
-        }
+        };
 
-module.exports = userType();

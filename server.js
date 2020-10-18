@@ -12,36 +12,13 @@ const PaymentUser = require('./model/PaymentUser.js');
 const FreeUser = require('./model/FreeUser.js');
 const User = require("./model/User.js");
 const userType = require('./model/userType.js');
+const validateUser = require('./Model/validateUser.js');
+
 
 //Users
 let users = require('./Controller/Users.js');
 
 
-
-console.log(User)
-console.log(PaymentUser);
-console.log(FreeUser);
-
-
-
-// Valdering med Joi til når man skal update og insert
-function validateUser(user) {
-    const schema = {
-        email: Joi.string().email().required(),  
-        name: Joi.string().required(),
-        age: Joi.number().required(),
-        gender: Joi.string().required(),
-        work: Joi.string().required(),
-        school: Joi.string().required(),
-        profile_text: Joi.string().required(),
-        profile_img: Joi.string().required(),
-        isPaying: Joi.required()
-                     
-     };
-
-    return Joi.validate(user, schema);
-
-}
 
 // Forsiden af dating appen med teksten "Dating App"
 app.get('/', (req, res) => {
@@ -96,7 +73,7 @@ app.post('/users', (req, res) =>{
 
     // sender user til serveren
     res.send(user);
-    
+    console.log(userType(user));
 });
 
 
