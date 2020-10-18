@@ -6,25 +6,12 @@ const app = express();
 app.use(express.json());
 
 const User = require('./model/user.js');
+const PaymentUser = require('./model/PaymentUser.js');
 
 
 // Opretter et array med betalende brugere
 const payingUsers = [];
 const freeUsers = [];
-
-
-// PaymentUser er extended af User 
-// Tror det forkert laavet fordi det er skrevet dobbelt op hvilket ikke giver mening i mit hovedet. 
-class PaymentUser extends User{
-    constructor(id, email, name, age, gender, work, school, profile_text, profile_img, isPaying, creditcard, cvc, expireDate)
-    {
-        super(id,email,name,age,gender,work,school,profile_text,profile_img,isPaying);
-        this.creditcard = creditcard;
-        this.cvc = cvc;
-        this.expireDate = expireDate;
-    }
-}
-
 
 class FreeUser extends User{
     constructor(id, email, name, age, gender, work, school, profile_text, profile_img, isPaying, creditcard, cvc, expireDate)
