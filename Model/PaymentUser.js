@@ -1,4 +1,5 @@
-const User = require('user.js');
+const User = require('../model/User.js');
+
 
 // PaymentUser er extended af User 
 // Tror det forkert laavet fordi det er skrevet dobbelt op hvilket ikke giver mening i mit hovedet. 

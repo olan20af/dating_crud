@@ -5,35 +5,24 @@ const { string, valid } = require('joi');
 const app = express();
 app.use(express.json());
 
-const User = require('./model/user.js');
+
+
+//Models 
 const PaymentUser = require('./model/PaymentUser.js');
+const FreeUser = require('./model/FreeUser.js');
+const User = require("./model/User.js");
+const userType = require('./model/userType.js');
+
+//Users
+let users = require('./Controller/Users.js');
 
 
-// Opretter et array med betalende brugere
-const payingUsers = [];
-const freeUsers = [];
 
-class FreeUser extends User{
-    constructor(id, email, name, age, gender, work, school, profile_text, profile_img, isPaying, creditcard, cvc, expireDate)
-    {
-        super(id,email,name,age,gender,work,school,profile_text,profile_img,isPaying);
-    }
-}
+console.log(User)
+console.log(PaymentUser);
+console.log(FreeUser);
 
-// Hardcoder forskellige users
-let User1 = new User(1, "peter@cbs.dk", "Peter", 27, "Male", "Nordea", "cbs", "Hej jeg hedder peter", "peter.jpg", 1);
-let User2 = new User(2, "simone@bilka.dk", "Simone", 27, "Female", "Bilka", "Frederiksberg-HF", "Hej jeg hedder Simone", "simone.jpg", 0);
-let User3 = new User(3, "Alfons@bi.dk","Alfons", 27, "Male", "Bog&Ide", "KU", "Hej jeg hedder Alfons Åberg", "alfons.jpg", 1);
-let User4 = new User(4, "Matilde@arla.dk","Matilde", 28, "Female", "Arla", "Landbrugsskolen", "Hej jeg hedder Matilde", "matilde.jpg", 0);
 
-// ligger users ind i et array 
-const users = [
-    User1,
-    User2,
-    User3,
-    User4,
-    
-];
 
 // Valdering med Joi til når man skal update og insert
 function validateUser(user) {
@@ -107,10 +96,6 @@ app.post('/users', (req, res) =>{
 
     // sender user til serveren
     res.send(user);
-    user.userType();
-
-    console.log(payingUsers);
-    console.log(freeUsers);
     
 });
 
